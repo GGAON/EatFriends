@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1012554462939",
+    "firebase_url": "https://firstproject-a108f-default-rtdb.firebaseio.com",
+    "project_id": "firstproject-a108f",
+    "storage_bucket": "firstproject-a108f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012554462939:android:a41758c72eccf880803efe",
+        "android_client_info": {
+          "package_name": "com.zeronine.project1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012554462939-japtakmdkf4e5tt2bpmla8mk1fgr3i05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNG2jP9NaPzhA3QSGGgqz8D2-FlvhOJ-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012554462939-japtakmdkf4e5tt2bpmla8mk1fgr3i05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

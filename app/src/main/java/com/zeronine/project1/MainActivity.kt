@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "뒤로가기 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
         } else {
             super.onBackPressed()
+            System.exit(0)
         }
     }
 

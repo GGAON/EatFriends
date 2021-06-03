@@ -10,6 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.zeronine.project1.MainActivity
 import com.zeronine.project1.R
 
 class SignUpActivity :AppCompatActivity() {
@@ -24,6 +25,10 @@ class SignUpActivity :AppCompatActivity() {
 
         initSignUpButton() // 회원가입하기
         SignUpButtonEnable() //회원가입 버튼 활성화
+
+        val signupButton = findViewById<Button>(R.id.signupButton)
+        signupButton.isEnabled = false
+
     }
 
 
@@ -43,7 +48,7 @@ class SignUpActivity :AppCompatActivity() {
                     if (task.isSuccessful) {
                         Toast.makeText(this, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
                         //handleSuccessSignUp()
-                        startActivity(Intent(this, LoginActivity::class.java))
+                        //startActivity(Intent(this, MainActivity::class.java))
                         finish()
 
                     } else {

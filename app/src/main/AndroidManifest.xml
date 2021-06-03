@@ -19,7 +19,8 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".intro.LoginActivity"/>
         <activity android:name=".intro.SignUpActivity"/>
-
+        <activity android:name=".home.MakeGroupActivity"/>
+        <activity android:name=".home.WaitingGroupActivity"/>
 
     </application>
 

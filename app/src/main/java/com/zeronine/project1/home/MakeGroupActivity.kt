@@ -44,6 +44,7 @@ class MakeGroupActivity : AppCompatActivity() {
     private fun foodButtonMenuListener() {
         btn_Korean.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
+
                 btn_Chicken.isChecked = false
                 btn_Pizza.isChecked = false
                 btn_SchoolFood.isChecked = false
@@ -58,7 +59,7 @@ class MakeGroupActivity : AppCompatActivity() {
         btn_Chicken.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 btn_Korean.isChecked = false
-                btn_Chicken.isChecked = false
+                btn_Pizza.isChecked = false
                 btn_SchoolFood.isChecked = false
                 btn_FastFood.isChecked = false
                 btn_Cafe_Dessert.isChecked = false

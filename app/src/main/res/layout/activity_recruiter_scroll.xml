@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    tools:viewBindingIgnore="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:viewBindingIgnore="true">
 
 
     <TextView
@@ -75,27 +75,30 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="@color/pink"
+                            android:background="@drawable/button_color_drawable"
                             android:padding="15dp"
-                            android:textOff="Korean" />
+                            android:textOff="Korean"
+                            android:textOn="Korean" />
 
                         <ToggleButton
                             android:id="@+id/btn_Chicken"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="@color/pink"
+                            android:background="@drawable/button_color_drawable"
                             android:padding="15dp"
-                            android:textOff="Chicken" />
+                            android:textOff="Chicken"
+                            android:textOn="Chicken" />
 
                         <ToggleButton
                             android:id="@+id/btn_Pizza"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="@color/pink"
+                            android:background="@drawable/button_color_drawable"
                             android:padding="15dp"
-                            android:textOff="Pizza" />
+                            android:textOff="Pizza"
+                            android:textOn="Pizza" />
 
                     </TableRow>
 
@@ -107,27 +110,30 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="@color/pink"
+                            android:background="@drawable/button_color_drawable"
                             android:padding="15dp"
-                            android:textOff="School Food" />
+                            android:textOff="School Food"
+                            android:textOn="School Food" />
 
                         <ToggleButton
                             android:id="@+id/btn_FastFood"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="@color/pink"
+                            android:background="@drawable/button_color_drawable"
                             android:padding="15dp"
-                            android:textOff="Fast Food" />
+                            android:textOff="Fast Food"
+                            android:textOn="Fast Food" />
 
                         <ToggleButton
                             android:id="@+id/btn_Cafe_Dessert"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="@color/pink"
+                            android:background="@drawable/button_color_drawable"
                             android:padding="15dp"
-                            android:textOff="Cafe / Dessert" />
+                            android:textOff="Cafe / Dessert"
+                            android:textOn="Cafe / Dessert" />
 
                     </TableRow>
 
@@ -138,27 +144,31 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="@color/pink"
+                            android:background="@drawable/button_color_drawable"
                             android:padding="15dp"
-                            android:textOff="Chinese Food" />
+                            android:textOff="Chinese Food"
+                            android:textOn="Chinese Food" />
 
                         <ToggleButton
                             android:id="@+id/btn_JapanFood"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="@color/pink"
+                            android:background="@drawable/button_color_drawable"
                             android:padding="15dp"
-                            android:textOff="Japan Food" />
+                            android:textOff="Japan Food"
+                            android:textOn="Japan Food" />
 
                         <ToggleButton
                             android:id="@+id/btn_AsianFood"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
-                            android:backgroundTint="@color/pink"
+                            android:background="@drawable/button_color_drawable"
+
                             android:padding="15dp"
-                            android:textOff="Asian Food" />
+                            android:textOff="Asian Food"
+                            android:textOn="Asian Food" />
 
                     </TableRow>
 
@@ -252,7 +262,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="maximum of waiting time : 59min"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/pink" />
 
 
             </LinearLayout>

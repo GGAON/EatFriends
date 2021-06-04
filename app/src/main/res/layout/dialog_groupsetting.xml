@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:padding="30dp"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:viewBindingIgnore="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -41,11 +40,11 @@
                 android:layout_margin="10dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:id="@+id/showFoodSetting"
-                android:layout_marginLeft="150dp"
+                android:layout_marginLeft="130dp"
                 android:layout_marginTop="5dp"/>
 
         </LinearLayout>
@@ -65,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:id="@+id/showGroupPeopleSetting"
-                android:layout_marginLeft="28dp"/>
+                android:layout_marginLeft="8dp"/>
 
         </LinearLayout>
         <LinearLayout
@@ -84,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:id="@+id/showTimeSetting"
-                android:layout_marginLeft="82dp"/>
+                android:layout_marginLeft="62dp"/>
 
         </LinearLayout>
 
@@ -106,6 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NO, let me change"
+        android:id="@+id/no"
         android:backgroundTint="@color/lightPink"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout"

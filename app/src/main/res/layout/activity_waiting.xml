@@ -93,6 +93,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:text="JOIN OTHER GROUP"
+        android:id="@+id/joinOtherGroup"
         android:backgroundTint="@color/lightPink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -1,20 +1,19 @@
 package com.zeronine.project1.home
 
-import android.app.ActivityGroup
-import android.content.Intent
+
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.zeronine.project1.R
 import com.zeronine.project1.databinding.ActivitySettingBinding
+import com.zeronine.project1.databinding.DialogGroupsettingBinding
 
 
 class MakeGroupActivity : AppCompatActivity() {
 
 
     //private val foodBinding = ActivitySettingBinding.inflate(layoutInflater)
-    private lateinit var foodBinding:ActivitySettingBinding
+    private lateinit var foodBinding: ActivitySettingBinding
+    private lateinit var settingBinding: DialogGroupsettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,20 +23,22 @@ class MakeGroupActivity : AppCompatActivity() {
         val view = foodBinding.root
         setContentView(view)
 
+        settingBinding = DialogGroupsettingBinding.inflate(layoutInflater)
+
+
+
         initNumberPicker()
         numberPickerListener()
         foodButtonMenuListener()
 
-
+        settingBinding.yes.setOnClickListener {
+            finish()
+            Log.d("yes click", "finish make group activity")
+        }
 
 
 
         foodBinding.startToMakeGroupButton.setOnClickListener {
-            startActivity(Intent(this, WaitingGroupActivity::class.java))
-//            val bundle = Bundle()
-//            bundle.putString("food", "Chicken")
-//            val fragment = GroupSettingDialogFragment()
-//            fragment.arguments = bundle
             GroupSettingDialogFragment().show(supportFragmentManager, "GroupSettingDialogFragment")
         }
 
@@ -45,12 +46,12 @@ class MakeGroupActivity : AppCompatActivity() {
 
     /*
     음식메뉴 고르기
-    버튼 1개 누른 후 다른 버튼 누르면 모두 안눌림으로 변경
+    버튼 1개 누른 후 다른 메뉴 버튼 누르면 모두 안눌림으로 변경
      */
     private fun foodButtonMenuListener() {
         foodBinding.btnKorean.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-
+                //settingBinding.showFoodSetting.text = "Kor"
                 foodBinding.btnChicken.isChecked = false
                 foodBinding.btnPizza.isChecked = false
                 foodBinding.btnSchoolFood.isChecked = false
@@ -177,8 +178,12 @@ class MakeGroupActivity : AppCompatActivity() {
         foodBinding.numberPickerWaitTime.maxValue = 59
         foodBinding.numberPickerWaitTime.wrapSelectorWheel = true
         val firstTotalPeople = foodBinding.numberPickerFriends.value + 1
-        foodBinding.showTotalPeopleNow.setText("Total number of people including you is ${firstTotalPeople}")
-        foodBinding.totalPeopleWarningText.setText("(※ Because of COVID-19, the maximum number of people on group is 4. )")
+//        foodBinding.showTotalPeopleNow.setText("Total number of people including you is ${firstTotalPeople}")
+        foodBinding.showTotalPeopleNow.text =
+            "Total number of people including you is ${firstTotalPeople}"
+//        foodBinding.totalPeopleWarningText.setText("(※ Because of COVID-19, the maximum number of people on group is 4. )")
+        foodBinding.totalPeopleWarningText.text =
+            "(※ Because of COVID-19, the maximum number of people on group is 4. )"
     }
 
     private fun numberPickerListener() {

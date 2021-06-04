@@ -21,6 +21,7 @@
         <activity android:name=".intro.SignUpActivity"/>
         <activity android:name=".home.MakeGroupActivity"/>
         <activity android:name=".home.WaitingGroupActivity"/>
+        <activity android:name=".home.JoinGroupActivity"/>
 
     </application>
 

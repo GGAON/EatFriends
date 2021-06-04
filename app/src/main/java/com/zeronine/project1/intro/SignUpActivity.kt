@@ -1,36 +1,34 @@
 package com.zeronine.project1.intro
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.zeronine.project1.MainActivity
 import com.zeronine.project1.R
+import com.zeronine.project1.databinding.ActivitySignupBinding
 
-class SignUpActivity :AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var signupBinding : ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+        //setContentView(R.layout.activity_signup)
+
+        signupBinding = ActivitySignupBinding.inflate(layoutInflater)
+        val view = signupBinding.root
+        setContentView(view)
 
         auth = Firebase.auth
+        signupBinding.signupButton.isEnabled = false
 
         initSignUpButton() // 회원가입하기
-        SignUpButtonEnable() //회원가입 버튼 활성화
-
-        val signupButton = findViewById<Button>(R.id.signupButton)
-        signupButton.isEnabled = false
-
+        enableSignUpButton() //회원가입 버튼 활성화
     }
-
 
 
     /*
@@ -38,7 +36,7 @@ class SignUpActivity :AppCompatActivity() {
      */
 
     private fun initSignUpButton() {
-        val signUpButton = findViewById<Button>(R.id.signupButton)
+        val signUpButton = signupBinding.signupButton
         signUpButton.setOnClickListener {
             val email = getInputEmail()
             val password = getInputPassword()
@@ -52,53 +50,58 @@ class SignUpActivity :AppCompatActivity() {
                         finish()
 
                     } else {
-                        Toast.makeText(this, "이미 가입한 이메일이거나, 회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "이미 가입한 이메일이거나, 회원가입에 실패했습니다.", Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                 }
         }
     }
 
-    private fun SignUpButtonEnable() {
-        val emailEditText = findViewById<EditText>(R.id.signupEmailEditText)
-        val passwordEditText = findViewById<EditText>(R.id.signupPasswordEditText)
-        val nameEditText = findViewById<EditText>(R.id.signupNameEditText)
-        val phoneNumberEditText = findViewById<EditText>(R.id.signupPhoneNumberEditText)
-        val signUpButton = findViewById<Button>(R.id.signupButton)
+    private fun enableSignUpButton() {
+        val emailEditText = signupBinding.signupEmailEditText
+        val passwordEditText = signupBinding.signupPasswordEditText
+        val nameEditText = signupBinding.signupNameEditText
+        val phoneNumberEditText = signupBinding.signupPhoneNumberEditText
+        val signUpButton = signupBinding.signupButton
 
         emailEditText.addTextChangedListener {
-            val enable = emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty() && nameEditText.text.isNotEmpty() && phoneNumberEditText.text.isNotEmpty()
+            val enable =
+                emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty() && nameEditText.text.isNotEmpty() && phoneNumberEditText.text.isNotEmpty()
             signUpButton.isEnabled = enable
         }
         passwordEditText.addTextChangedListener {
-            val enable = emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty() && nameEditText.text.isNotEmpty() && phoneNumberEditText.text.isNotEmpty()
+            val enable =
+                emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty() && nameEditText.text.isNotEmpty() && phoneNumberEditText.text.isNotEmpty()
             signUpButton.isEnabled = enable
         }
         nameEditText.addTextChangedListener {
-            val enable = emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty() && nameEditText.text.isNotEmpty() && phoneNumberEditText.text.isNotEmpty()
+            val enable =
+                emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty() && nameEditText.text.isNotEmpty() && phoneNumberEditText.text.isNotEmpty()
             signUpButton.isEnabled = enable
         }
         phoneNumberEditText.addTextChangedListener {
-            val enable = emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty() && nameEditText.text.isNotEmpty() && phoneNumberEditText.text.isNotEmpty()
+            val enable =
+                emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty() && nameEditText.text.isNotEmpty() && phoneNumberEditText.text.isNotEmpty()
             signUpButton.isEnabled = enable
         }
 
     }
 
     private fun getInputEmail(): String {
-        return findViewById<EditText>(R.id.signupEmailEditText).text.toString()
+        return signupBinding.signupEmailEditText.text.toString()
     }
 
     private fun getInputPassword(): String {
-        return findViewById<EditText>(R.id.signupPasswordEditText).text.toString()
+        return signupBinding.signupPasswordEditText.text.toString()
     }
 
     private fun getInputName(): String {
-        return findViewById<EditText>(R.id.signupNameEditText).text.toString()
+        return signupBinding.signupNameEditText.text.toString()
     }
 
     private fun getInputPhoneNumber(): String {
-        return findViewById<EditText>(R.id.signupPhoneNumberEditText).text.toString()
+        return signupBinding.signupPhoneNumberEditText.text.toString()
     }
 
 //    private fun handleSuccessSignUp() {

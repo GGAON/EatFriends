@@ -6,12 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.zeronine.project1.R
-import kotlinx.android.synthetic.*
 
 class GroupSettingDialogFragment : DialogFragment() {
-
-    //private var _binding: DialogGroupsetting? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -16,7 +16,7 @@ import com.zeronine.project1.mypage.MyPageFragment
 class MainActivity : AppCompatActivity() {
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private var backWait:Long = 0
+    private var backWait: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,18 +59,24 @@ class MainActivity : AppCompatActivity() {
         //val currentUser = auth.currentUser
         if (auth.currentUser == null) {//로그인이 되지 않았을 때
             //setContentView(R.layout.activity_login)
-            startActivity(Intent(this, LoginActivity::class.java)) // 로그인이 되어있지 않을 때 LoginActivity로 이동하라
+            startActivity(
+                Intent(
+                    this,
+                    LoginActivity::class.java
+                )
+            ) // 로그인이 되어있지 않을 때 LoginActivity로 이동하라
             finish()
         }
     }
 
     override fun onBackPressed() {
-        if(System.currentTimeMillis() - backWait >= 2000) {
+        if (System.currentTimeMillis() - backWait >= 2000) {
             backWait = System.currentTimeMillis()
             Toast.makeText(this, "뒤로가기 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
         } else {
+
             super.onBackPressed()
-            System.exit(0)
+            finish()
         }
     }
 

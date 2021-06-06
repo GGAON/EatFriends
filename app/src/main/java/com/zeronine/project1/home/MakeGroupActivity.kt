@@ -10,14 +10,11 @@ import com.zeronine.project1.databinding.DialogGroupsettingBinding
 
 class MakeGroupActivity : AppCompatActivity() {
 
-
-    //private val foodBinding = ActivitySettingBinding.inflate(layoutInflater)
     private lateinit var foodBinding: ActivitySettingBinding
     private lateinit var settingBinding: DialogGroupsettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_setting)
 
         foodBinding = ActivitySettingBinding.inflate(layoutInflater)
         val view = foodBinding.root
@@ -187,11 +184,11 @@ class MakeGroupActivity : AppCompatActivity() {
     }
 
     private fun numberPickerListener() {
-        foodBinding.numberPickerFriends.setOnValueChangedListener { picker, oldVal, newVal ->
+        foodBinding.numberPickerFriends.setOnValueChangedListener { _, oldVal, newVal ->
             Log.d("numberPicker_friends", "oldVal : ${oldVal}, newVal : $newVal ")
             val totalPeople = newVal.toInt() + 1
-            foodBinding.showTotalPeopleNow.setText("Total number of people including you is ${totalPeople}")
-            foodBinding.totalPeopleWarningText.setText("(※ Because of COVID-19, the maximum number of people on group is 4. )")
+            foodBinding.showTotalPeopleNow.text = "Total number of people including you is ${totalPeople}"
+            foodBinding.totalPeopleWarningText.text = "(※ Because of COVID-19, the maximum number of people on group is 4. )"
         }
     }
 }

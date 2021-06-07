@@ -274,11 +274,11 @@
         android:id="@+id/startToMakeGroupButton"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:backgroundTint="@color/lightPink"
         android:text="Start to make Group!"
         android:textSize="20dp"
+        android:backgroundTint="@color/pink"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"></Button>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

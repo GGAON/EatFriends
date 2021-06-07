@@ -49,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
                         Toast.makeText(this, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
                         val user = auth.currentUser
                         handleSuccessSignUp(user)
-                        finish()
+                        //finish()
 
                     } else {
                         Toast.makeText(this, "이미 가입한 이메일이거나, 회원가입에 실패했습니다.", Toast.LENGTH_SHORT)

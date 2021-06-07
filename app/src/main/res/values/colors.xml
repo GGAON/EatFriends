@@ -15,4 +15,10 @@
     <color name="lightGreen">#D2FFB1</color>
     <color name="lightBlue">#B1E0FF</color>
     <color name="lightPurple">#E8B1FF</color>
+    <color name="redOrange">#FF5722</color>
+    <color name="lightRedOrange">#FF7A22</color>
+    <color name="orange">#FBB03B</color>
+    <color name="lightOrange">#FFD38E</color>
+    <color name="mainPink">#ED1E79</color>
+
 </resources>

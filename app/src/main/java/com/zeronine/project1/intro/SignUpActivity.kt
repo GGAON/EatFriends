@@ -5,7 +5,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.zeronine.project1.R
 import com.zeronine.project1.databinding.ActivitySignupBinding
@@ -45,8 +47,8 @@ class SignUpActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
-                        //handleSuccessSignUp()
-                        //startActivity(Intent(this, MainActivity::class.java))
+                        val user = auth.currentUser
+                        handleSuccessSignUp(user)
                         finish()
 
                     } else {
@@ -54,6 +56,10 @@ class SignUpActivity : AppCompatActivity() {
                             .show()
                     }
 
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "이미 가입한 이메일이거나, 회원가입에 실패했습니다.", Toast.LENGTH_SHORT)
+                        .show()
                 }
         }
     }
@@ -104,7 +110,21 @@ class SignUpActivity : AppCompatActivity() {
         return signupBinding.signupPhoneNumberEditText.text.toString()
     }
 
-//    private fun handleSuccessSignUp() {
+    private fun handleSuccessSignUp(user: FirebaseUser?) {
+
+
+
+        val userId = user?.uid.orEmpty()
+        val currentUserDB = Firebase.database.reference.child("Users").child(userId)
+        val userInfo = mutableMapOf<String, Any>()
+        userInfo["userId"] = userId
+        userInfo["email"] = getInputEmail()
+        userInfo["name"] = getInputName()
+        userInfo["phone number"] = getInputPhoneNumber()
+        currentUserDB.updateChildren(userInfo)
+
+
+        finish()
 //        val database = FirebaseDatabase.getInstance()
 //        val myRef = database.getReference()
 //        var uid:String = ""
@@ -121,6 +141,6 @@ class SignUpActivity : AppCompatActivity() {
 //        )
 //
 //        myRef.child(uid).setValue(dataInput)
-//    }
+    }
 
 }

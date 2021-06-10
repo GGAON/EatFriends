@@ -21,11 +21,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".PageActivity"/>
         <activity android:name=".intro.LoginActivity"/>
         <activity android:name=".intro.SignUpActivity"/>
         <activity android:name=".home.MakeGroupActivity"/>
         <activity android:name=".home.WaitingGroupActivity"/>
         <activity android:name=".home.JoinGroupActivity"/>
+        <activity android:name=".mypage.HowToUseActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -20,5 +20,7 @@
     <color name="orange">#FBB03B</color>
     <color name="lightOrange">#FFD38E</color>
     <color name="mainPink">#ED1E79</color>
+    <color name="newPurple">#DC32FF</color>
+    <color name="newlightPurple">#C457FF</color>
 
 </resources>

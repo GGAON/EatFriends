@@ -48,12 +48,21 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
             Log.e("currentUserDB", "Error getting name")
         }
 
+        myPageFragment.howToUseButton.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(context, HowToUseActivity::class.java))
+            }
+        }
+
+
         myPageFragment.LogOutButton.setOnClickListener {
             Toast.makeText(activity, "Log Out", Toast.LENGTH_SHORT).show()
             FirebaseAuth.getInstance().signOut()
             activity?.let {
                 startActivity(Intent(context, MainActivity::class.java))
-            } }
+            }
+            childFragmentManager
+        }
 
     }
 

@@ -2,6 +2,7 @@ package com.zeronine.project1.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class GroupSettingDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val binding2 = DialogGroupsettingBinding.bind(view)
+
         binding2.yes.setOnClickListener {
             activity?.let {
                 startActivity(Intent(context, WaitingGroupActivity::class.java))

@@ -8,10 +8,13 @@ import com.zeronine.project1.databinding.ActivitySettingBinding
 import com.zeronine.project1.databinding.DialogGroupsettingBinding
 
 
+private var totalPeople : Int = 9
+
 class MakeGroupActivity : AppCompatActivity() {
 
     private lateinit var foodBinding: ActivitySettingBinding
     private lateinit var settingBinding: DialogGroupsettingBinding
+    //private val totalPeople = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +51,8 @@ class MakeGroupActivity : AppCompatActivity() {
     private fun foodButtonMenuListener() {
         foodBinding.btnKorean.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
+//                val bundle = Bundle()
+//                bundle.putString("", "")
                 //settingBinding.showFoodSetting.text = "Kor"
                 foodBinding.btnChicken.isChecked = false
                 foodBinding.btnPizza.isChecked = false
@@ -186,7 +191,8 @@ class MakeGroupActivity : AppCompatActivity() {
     private fun numberPickerListener() {
         foodBinding.numberPickerFriends.setOnValueChangedListener { _, oldVal, newVal ->
             Log.d("numberPicker_friends", "oldVal : ${oldVal}, newVal : $newVal ")
-            val totalPeople = newVal.toInt() + 1
+            totalPeople = newVal.toInt() + 1
+            Log.d("checkVar", "${totalPeople}")
             foodBinding.showTotalPeopleNow.text = "Total number of people including you is ${totalPeople}"
             foodBinding.totalPeopleWarningText.text = "(※ Because of COVID-19, the maximum number of people on group is 4. )"
         }

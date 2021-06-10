@@ -10,12 +10,12 @@
         android:id="@+id/groupSetting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/pink"
         android:padding="10dp"
         android:text="GROUP SETTING"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="30sp"
+        android:background="@color/newPurple"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +64,7 @@
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/lightLightPink"
+
                     android:padding="10dp">
 
                     <TableRow android:layout_width="match_parent">
@@ -276,7 +276,7 @@
         android:layout_height="70dp"
         android:text="Start to make Group!"
         android:textSize="20dp"
-        android:backgroundTint="@color/pink"
+        android:backgroundTint="@color/newlightPurple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

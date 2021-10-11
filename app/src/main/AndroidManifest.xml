@@ -13,21 +13,23 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project1">
-        <activity android:name=".intro.SplashActivity">
+        <activity android:name="com.zeronine.project1.screen.intro.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".PageActivity"/>
-        <activity android:name=".intro.LoginActivity"/>
-        <activity android:name=".intro.SignUpActivity"/>
-        <activity android:name=".home.MakeGroupActivity"/>
-        <activity android:name=".home.WaitingGroupActivity"/>
-        <activity android:name=".home.JoinGroupActivity"/>
-        <activity android:name=".mypage.HowToUseActivity"/>
+        <activity android:name=".screen.base.MainActivity"/>
+        <activity android:name=".screen.base.PageActivity"/>
+        <activity android:name="com.zeronine.project1.screen.intro.LoginActivity"/>
+        <activity android:name="com.zeronine.project1.screen.intro.SignUpActivity"/>
+        <activity android:name="com.zeronine.project1.screen.home.MakeGroupActivity"/>
+        <activity android:name="com.zeronine.project1.screen.home.WaitingGroupActivity"/>
+        <activity android:name="com.zeronine.project1.screen.home.JoinGroupActivity"/>
+        <activity android:name="com.zeronine.project1.screen.mypage.HowToUseActivity"/>]
+        <activity android:name=".screen.order.OrderActivity"/>
+        <activity android:name=".screen.order.DeliveryActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

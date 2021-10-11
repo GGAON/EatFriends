@@ -1,9 +1,8 @@
-package com.zeronine.project1.home
+package com.zeronine.project1.screen.home
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.graphics.Camera
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +17,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.zeronine.project1.R
 import com.zeronine.project1.databinding.ActivityJoinBinding
 import org.jetbrains.anko.alert

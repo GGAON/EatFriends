@@ -1,4 +1,4 @@
-package com.zeronine.project1.intro
+package com.zeronine.project1.screen.intro
 
 import android.os.Bundle
 import android.widget.Toast
@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.zeronine.project1.R
 import com.zeronine.project1.databinding.ActivitySignupBinding
 
 class SignUpActivity : AppCompatActivity() {
@@ -123,8 +122,6 @@ class SignUpActivity : AppCompatActivity() {
         userInfo["phone number"] = getInputPhoneNumber()
         currentUserDB.updateChildren(userInfo)
 
-
-        finish()
 //        val database = FirebaseDatabase.getInstance()
 //        val myRef = database.getReference()
 //        var uid:String = ""
@@ -141,6 +138,9 @@ class SignUpActivity : AppCompatActivity() {
 //        )
 //
 //        myRef.child(uid).setValue(dataInput)
+
+
+        finish()
     }
 
 }

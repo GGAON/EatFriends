@@ -1,4 +1,4 @@
-package com.zeronine.project1
+package com.zeronine.project1.screen.base
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,18 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.zeronine.project1.friends.FriendsFragment
-import com.zeronine.project1.history.HistoryFragment
-import com.zeronine.project1.home.HomeFragment
-import com.zeronine.project1.intro.LoginActivity
-import com.zeronine.project1.mypage.MyPageFragment
+import com.zeronine.project1.R
+import com.zeronine.project1.screen.friends.FriendsFragment
+import com.zeronine.project1.screen.history.HistoryFragment
+import com.zeronine.project1.screen.home.HomeFragment
+import com.zeronine.project1.screen.intro.LoginActivity
+import com.zeronine.project1.screen.mypage.MyPageFragment
 
 class PageActivity:AppCompatActivity() {
 
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     private var backWait: Long = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page)

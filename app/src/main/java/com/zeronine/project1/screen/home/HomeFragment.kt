@@ -1,4 +1,4 @@
-package com.zeronine.project1.home
+package com.zeronine.project1.screen.home
 
 import android.content.Intent
 import android.os.Bundle

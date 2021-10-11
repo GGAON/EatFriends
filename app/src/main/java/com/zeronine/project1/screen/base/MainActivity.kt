@@ -1,12 +1,11 @@
-package com.zeronine.project1
+package com.zeronine.project1.screen.base
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.zeronine.project1.intro.LoginActivity
+import com.zeronine.project1.R
+import com.zeronine.project1.screen.intro.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 

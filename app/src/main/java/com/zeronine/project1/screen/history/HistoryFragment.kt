@@ -1,4 +1,4 @@
-package com.zeronine.project1.history
+package com.zeronine.project1.screen.history
 
 import androidx.fragment.app.Fragment
 import com.zeronine.project1.R

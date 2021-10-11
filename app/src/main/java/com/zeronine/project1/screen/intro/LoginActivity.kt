@@ -1,4 +1,4 @@
-package com.zeronine.project1.intro
+package com.zeronine.project1.screen.intro
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.zeronine.project1.MainActivity
-import com.zeronine.project1.R
+import com.zeronine.project1.screen.base.MainActivity
 import com.zeronine.project1.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

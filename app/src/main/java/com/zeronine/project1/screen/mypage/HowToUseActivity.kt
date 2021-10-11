@@ -1,4 +1,4 @@
-package com.zeronine.project1.mypage
+package com.zeronine.project1.screen.mypage
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

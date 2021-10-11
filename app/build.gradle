@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -59,4 +60,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0-alpha02'
 
     implementation "org.jetbrains.anko:anko:$anko_version"
+
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+    testImplementation 'org.jetbrains.kotilnx:kotlinx-coroutines-test:1.4.3'
 }

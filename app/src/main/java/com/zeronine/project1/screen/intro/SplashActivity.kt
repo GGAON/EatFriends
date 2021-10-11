@@ -1,11 +1,11 @@
-package com.zeronine.project1.intro
+package com.zeronine.project1.screen.intro
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.zeronine.project1.MainActivity
+import com.zeronine.project1.screen.base.MainActivity
 import com.zeronine.project1.R
 
 class SplashActivity : AppCompatActivity() {

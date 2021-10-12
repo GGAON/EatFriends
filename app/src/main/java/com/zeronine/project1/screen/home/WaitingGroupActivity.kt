@@ -1,8 +1,10 @@
 package com.zeronine.project1.screen.home
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -26,16 +28,25 @@ class WaitingGroupActivity:AppCompatActivity() {
 
         showGroupSetting()
 
-        waitingBinding.joinOtherGroup.setOnClickListener {
-            finish()
-            startActivity(Intent(this, JoinGroupActivity::class.java))
-        }
+//        waitingBinding.joinOtherGroup.setOnClickListener {
+//            finish()
+//            startActivity(Intent(this, JoinGroupActivity::class.java))
+//        }
+//
+//        waitingBinding.orderNowButton.setOnClickListener {
+//            finish()
+//            startActivity(Intent(this, OrderActivity::class.java))
+//        }
 
-        waitingBinding.orderNowButton.setOnClickListener {
-            finish()
-            startActivity(Intent(this, OrderActivity::class.java))
-        }
+    }
 
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle("Are you no longer waiting for your friends?")
+            .setPositiveButton("Finish waiting") { _: DialogInterface, _:Int -> finish()}
+            .setNegativeButton("Wait more") { _: DialogInterface, _:Int->}
+            .show()
+        //super.onBackPressed()
     }
 
     private fun showGroupSetting() {

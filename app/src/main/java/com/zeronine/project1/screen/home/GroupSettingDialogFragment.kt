@@ -2,6 +2,7 @@ package com.zeronine.project1.screen.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.zeronine.project1.databinding.DialogGroupsettingBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 public lateinit var groupSettingId : String
 
@@ -38,6 +41,8 @@ class GroupSettingDialogFragment : DialogFragment() {
 
         binding2.yes.setOnClickListener {
 
+            Log.d("yes click", "yes button is clicked!!")
+            //getCurrentTime()
             saveGroupSetting()
 
             activity?.let {
@@ -50,8 +55,17 @@ class GroupSettingDialogFragment : DialogFragment() {
         }
     }
 
+    private fun getCurrentTime() : String {
+        val now : Long = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("ko", "KR"))
+        val stringTime = dateFormat.format(date)
+        Log.d("Check currentTime", "Current Time : ${stringTime}")
+        return stringTime.toString()
+    }
+
     private fun saveGroupSetting() {
-//        TODO("Group Setting을 하기로 하였으므로 database에 저장한다")
+// "Group Setting을 하기로 결정하였으므로 database에 저장한다"
 
         val recruiterId = Firebase.auth.currentUser?.uid.orEmpty()
         groupSettingId = Firebase.database.reference.child("GroupSetting").push().key.orEmpty()
@@ -61,9 +75,10 @@ class GroupSettingDialogFragment : DialogFragment() {
         groupSettingInfo["food category"] = foodCategory.toString()
         groupSettingInfo["total people"] = totalPeople.toString()
         groupSettingInfo["waiting time"] = waitingTime.toString()
-//        groupSettingInfo["recruiter latitude"]
-//        groupSettingInfo["recruiter longitude"]
+        groupSettingInfo["recruiter latitude"] = recruiterLat.toString()
+        groupSettingInfo["recruiter longitude"] = recruiterLng.toString()
         groupSettingInfo["recruiting"] = "True"
+        groupSettingInfo["start time"] = getCurrentTime()
         currentGroupSettingDB.updateChildren(groupSettingInfo)
 
     }

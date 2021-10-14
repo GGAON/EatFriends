@@ -51,9 +51,9 @@ class WaitingGroupActivity:AppCompatActivity() {
 
     private fun showGroupSetting() {
 
-        val foodCategorySettingDB = groupSettingDB.child(groupSettingId).child("food category")
-        val totalPeopleSettingDB = groupSettingDB.child(groupSettingId).child("total people")
-        val waitingTimeSettingDB = groupSettingDB.child(groupSettingId).child("waiting time")
+        val foodCategorySettingDB = groupSettingDB.child(groupSettingId).child("foodCategory")
+        val totalPeopleSettingDB = groupSettingDB.child(groupSettingId).child("totalPeople")
+        val waitingTimeSettingDB = groupSettingDB.child(groupSettingId).child("waitingTime")
 
 
         foodCategorySettingDB.get().addOnSuccessListener {

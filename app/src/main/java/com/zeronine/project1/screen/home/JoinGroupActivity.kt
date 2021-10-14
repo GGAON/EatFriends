@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -17,12 +18,22 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.zeronine.project1.R
+import com.zeronine.project1.data.DB.DBKey.Companion.DB_GROUPSETTING
 import com.zeronine.project1.databinding.ActivityJoinBinding
+import com.zeronine.project1.widget.adapter.GroupSettingAdapter
+import com.zeronine.project1.widget.model.GroupSettingModel
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
+import java.security.acl.Group
 
 class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -32,6 +43,40 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
 
+    private lateinit var groupSettingDB: DatabaseReference
+    private lateinit var groupSettingAdapter: GroupSettingAdapter
+
+    private val groupSettingList = mutableListOf<GroupSettingModel>()
+    private val listener = object: ChildEventListener {
+        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+            val groupSettingModel = snapshot.getValue(GroupSettingModel::class.java)
+            groupSettingModel ?: return
+            groupSettingList.add(groupSettingModel)
+            Log.d("CHECK THIS!!", "${groupSettingList}")
+            groupSettingAdapter.submitList(groupSettingList)
+//            groupSettingAdapter.submitList(mutableListOf<GroupSettingModel>().apply {
+//                add(GroupSettingModel("45678", "aa", "dd", "dd", "", "", "", "", ""))
+//            })
+        }
+
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+        }
+
+        override fun onChildRemoved(snapshot: DataSnapshot) {
+
+        }
+
+        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,9 +84,22 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
         val view = joinBinding.root
         setContentView(view)
 
+        groupSettingDB = Firebase.database.reference.child(DB_GROUPSETTING)
+        groupSettingAdapter = GroupSettingAdapter()
+
+        joinBinding.recyclerView.layoutManager = LinearLayoutManager(this)
+        joinBinding.recyclerView.adapter = groupSettingAdapter
+
         setupGoogleMap()
         locationInit()
+//        getRecruitingGroupSetting()
+        groupSettingDB.addChildEventListener(listener)
     }
+
+//    private fun getRecruitingGroupSetting() {
+//        groupSettingDB.addChildEventListener(listener)
+//        Log.d("CHECK THIS!!!", "addChildEvent Listener 이 실행중입니다.")
+//    }
 
 
     private fun setupGoogleMap() {

@@ -71,14 +71,15 @@ class GroupSettingDialogFragment : DialogFragment() {
         groupSettingId = Firebase.database.reference.child("GroupSetting").push().key.orEmpty()
         val currentGroupSettingDB = Firebase.database.reference.child("GroupSetting").child(groupSettingId)
         val groupSettingInfo = mutableMapOf<String,Any>()
-        groupSettingInfo["recruiter id"] = recruiterId
-        groupSettingInfo["food category"] = foodCategory.toString()
-        groupSettingInfo["total people"] = totalPeople.toString()
-        groupSettingInfo["waiting time"] = waitingTime.toString()
-        groupSettingInfo["recruiter latitude"] = recruiterLat.toString()
-        groupSettingInfo["recruiter longitude"] = recruiterLng.toString()
+        groupSettingInfo["groupSettingId"] = groupSettingId
+        groupSettingInfo["recruiterId"] = recruiterId
+        groupSettingInfo["foodCategory"] = foodCategory.toString()
+        groupSettingInfo["totalPeople"] = totalPeople.toString()
+        groupSettingInfo["waitingTime"] = waitingTime.toString()
+        groupSettingInfo["recruiterLat"] = recruiterLat.toString()
+        groupSettingInfo["recruiterLng"] = recruiterLng.toString()
         groupSettingInfo["recruiting"] = "True"
-        groupSettingInfo["start time"] = getCurrentTime()
+        groupSettingInfo["startTime"] = getCurrentTime()
         currentGroupSettingDB.updateChildren(groupSettingInfo)
 
     }

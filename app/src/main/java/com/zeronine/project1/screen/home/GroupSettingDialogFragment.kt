@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -15,7 +14,7 @@ import com.zeronine.project1.databinding.DialogGroupsettingBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-public lateinit var groupSettingId : String
+public var groupSettingId : String? = null
 
 class GroupSettingDialogFragment : DialogFragment() {
 
@@ -69,22 +68,31 @@ class GroupSettingDialogFragment : DialogFragment() {
 
         val recruiterId = Firebase.auth.currentUser?.uid.orEmpty()
         groupSettingId = Firebase.database.reference.child("GroupSetting").push().key.orEmpty()
-        val currentGroupSettingDB = Firebase.database.reference.child("GroupSetting").child(groupSettingId)
+        val currentGroupSettingDB = Firebase.database.reference.child("GroupSetting").child(
+            groupSettingId!!
+        )
         val groupSettingInfo = mutableMapOf<String,Any>()
-        groupSettingInfo["groupSettingId"] = groupSettingId
+        groupSettingInfo["groupSettingId"] = groupSettingId!!
         groupSettingInfo["recruiterId"] = recruiterId
         groupSettingInfo["foodCategory"] = foodCategory.toString()
         groupSettingInfo["totalPeople"] = totalPeople.toString()
         groupSettingInfo["waitingTime"] = waitingTime.toString()
-        groupSettingInfo["recruiterLat"] = recruiterLat.toString()
-        groupSettingInfo["recruiterLng"] = recruiterLng.toString()
-        groupSettingInfo["recruiting"] = "True"
+        groupSettingInfo["recruiterLat"] = recruiterLat!!
+        groupSettingInfo["recruiterLng"] = recruiterLng!!
+        /*
+        recruiting
+        0 : 기본생성자 임의값
+        1 : 공동구매 모집중
+        2 : 공동구매 성공
+        3 : 공동구매 실패
+         */
+        groupSettingInfo["recruiting"] = 1
         groupSettingInfo["startTime"] = getCurrentTime()
         currentGroupSettingDB.updateChildren(groupSettingInfo)
 
     }
 
-    fun getGroupSettingId() : String {
+    public fun getGroupSettingId() : String? {
         return groupSettingId
     }
 

@@ -1,16 +1,17 @@
 package com.zeronine.project1.widget.model
 
 data class GroupSettingModel(
-    val foodCategory: String,
     val groupSettingID: String,
     val recruiterId: String,
-    val recruiterLat: String,
-    val recruiterLng: String,
-    val recruiting: String,
-    val startTime: String ,
+    val foodCategory: String,
     val totalPeople: String,
-    val waitingTime: String
+    val waitingTime: String,
+    val recruiterLat: Double,
+    val recruiterLng: Double,
+    val recruiting: Int,
+    val startTime: String
+
 )
 {
-    constructor(): this("", "", "", "", "", "", "", "", "")
+    constructor(): this("", "", "", "", "", 37.55169195608614, 126.92498046225892, 0, "")
 }

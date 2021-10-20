@@ -16,10 +16,14 @@ class GroupSettingAdapter :
     inner class ViewHolder(private val binding: ItemGroupsettingBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(groupSettingModel: GroupSettingModel) {
-            Log.d("GroupSettingAdapter", "${groupSettingModel.foodCategory}")
-            binding.foodCategoryTextView.text = "Food category : ${groupSettingModel.foodCategory}"
-            binding.totalPeopleTextView.text = "Total People : ${groupSettingModel.totalPeople}"
-            binding.waitingTimeTextView.text = "Waiting Time : ${groupSettingModel.waitingTime} min"
+            if(groupSettingModel.recruiting == 1) { // 이 공동구매 세팅이 진행중(1)이라면 RecyclerView 에서 보여준다
+                Log.d("Checking Recruiting", "It is ${groupSettingModel.recruiting}") //로그를 찍어서 True 를 잘 가져오는지 확인
+                Log.d("GroupSettingAdapter", "${groupSettingModel.foodCategory}")
+                binding.foodCategoryTextView.text = "Food category : ${groupSettingModel.foodCategory}"
+                binding.totalPeopleTextView.text = "Total People : ${groupSettingModel.totalPeople}"
+                binding.waitingTimeTextView.text = "Waiting Time : ${groupSettingModel.waitingTime} min"
+            }
+
         }
     }
 

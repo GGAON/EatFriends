@@ -39,8 +39,8 @@ public var totalPeople : Int? = 2
 public var waitingTime : Int? = 5
 
 //공동구매 모집자의 현재 위치 변수 2가지
-public var recruiterLat : String? = null
-public var recruiterLng : String? = null
+public var recruiterLat : Double? = 37.55169195608614
+public var recruiterLng : Double? = 126.92498046225892
 
 //뒤로가기 버튼을 누르기 위한 시간 세팅
 private var backWait: Long = 0
@@ -372,8 +372,8 @@ class MakeGroupActivity : AppCompatActivity(), OnMapReadyCallback {
         markerOptions.position(currentLatLng)
         markerOptions.draggable(true)
         currentMarker = map.addMarker(markerOptions)
-        recruiterLat = location.latitude.toString()
-        recruiterLng = location.longitude.toString()
+        recruiterLat = location.latitude
+        recruiterLng = location.longitude
     }
 
 

@@ -1,7 +1,6 @@
 package com.zeronine.project1.screen.home
 
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
@@ -10,11 +9,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.zeronine.project1.databinding.ActivityWaitingBinding
-import com.zeronine.project1.screen.order.OrderActivity
-
 private lateinit var groupSettingDB: DatabaseReference
 
-class WaitingGroupActivity:AppCompatActivity() {
+class WaitingGroupActivity:AppCompatActivity(){
 
     private lateinit var waitingBinding : ActivityWaitingBinding
 
@@ -43,34 +40,42 @@ class WaitingGroupActivity:AppCompatActivity() {
     override fun onBackPressed() {
         AlertDialog.Builder(this)
             .setTitle("Are you no longer waiting for your friends?")
-            .setPositiveButton("Finish waiting") { _: DialogInterface, _:Int -> finish()}
+            .setPositiveButton("Finish waiting") { _: DialogInterface, _:Int ->
+                groupSettingId?.let { groupSettingDB.child(it).child("recruiting").setValue(3) }
+//                Log.d("CancelGroupSetting", "Turned to ${groupSettingId?.let {
+//                    groupSettingDB.child(
+//                        it
+//                    ).child("recruiting")
+//                }}")
+                groupSettingId = null
+                finish()
+            }
             .setNegativeButton("Wait more") { _: DialogInterface, _:Int->}
             .show()
         //super.onBackPressed()
     }
 
     private fun showGroupSetting() {
+        val foodCategorySettingDB = groupSettingId?.let { groupSettingDB.child(it).child("foodCategory") }
+        val totalPeopleSettingDB = groupSettingId?.let { groupSettingDB.child(it).child("totalPeople") }
+        val waitingTimeSettingDB = groupSettingId?.let { groupSettingDB.child(it).child("waitingTime") }
 
-        val foodCategorySettingDB = groupSettingDB.child(groupSettingId).child("foodCategory")
-        val totalPeopleSettingDB = groupSettingDB.child(groupSettingId).child("totalPeople")
-        val waitingTimeSettingDB = groupSettingDB.child(groupSettingId).child("waitingTime")
 
-
-        foodCategorySettingDB.get().addOnSuccessListener {
+        foodCategorySettingDB!!.get().addOnSuccessListener {
             Log.i("foodCategorySettingDB", "Got value : ${it.value}")
             waitingBinding.showFoodSetting.text= "■ food category : ${it.value}"
         }.addOnFailureListener {
             Log.e("foodCategorySettingDB", "Error getting food category setting")
         }
 
-        totalPeopleSettingDB.get().addOnSuccessListener {
+        totalPeopleSettingDB!!.get().addOnSuccessListener {
             Log.i("totalPeopleSettingDB", "Got value : ${it.value}")
             waitingBinding.showTotalPeopleSetting.text= "■ total people : ${it.value}"
         }.addOnFailureListener {
             Log.e("totalPeopleSettingDB", "Error getting total people setting")
         }
 
-        waitingTimeSettingDB.get().addOnSuccessListener {
+        waitingTimeSettingDB!!.get().addOnSuccessListener {
             Log.i("waitingTimeSettingDB", "Got value : ${it.value}")
             waitingBinding.showWaitingTimeSetting.text= "■ waiting time : ${it.value} min"
         }.addOnFailureListener {

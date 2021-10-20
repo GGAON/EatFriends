@@ -30,14 +30,14 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
         myPageFragment = FragmentMypageBinding.bind(view)
         auth = Firebase.auth
         userDB = Firebase.database.reference.child("Users")
-//        val currentUserDB = userDB.child(getCurrentUserID()).child("name")
-//
-//        currentUserDB.get().addOnSuccessListener {
-//            Log.i("currentUserDB", "Got name : ${it.value}")
-//            myPageFragment.showName.text = "Hello, ${it.value}"
-//        }.addOnFailureListener {
-//            Log.e("currentUserDB", "Error getting name")
-//        }
+        val currentUserDB = userDB.child(getCurrentUserID()).child("name")
+
+        currentUserDB.get().addOnSuccessListener {
+            Log.i("currentUserDB", "Got name : ${it.value}")
+            myPageFragment.showName.text = "Hello, ${it.value}"
+        }.addOnFailureListener {
+            Log.e("currentUserDB", "Error getting name")
+        }
 
         myPageFragment.howToUseButton.setOnClickListener {
             activity?.let {

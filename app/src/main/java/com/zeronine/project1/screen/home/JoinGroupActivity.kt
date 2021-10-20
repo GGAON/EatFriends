@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -51,12 +52,24 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
             val groupSettingModel = snapshot.getValue(GroupSettingModel::class.java)
             groupSettingModel ?: return
-            groupSettingList.add(groupSettingModel)
+            if(groupSettingModel.recruiting == 1){  // 이 공동구매 세팅이 진행중(1)이라면 groupSettingList 에 추가한다
+                groupSettingList.add(groupSettingModel)
+                addGroupSettingMarkerOnMap(groupSettingModel)
+            }
             Log.d("CHECK THIS!!", "${groupSettingList}")
             groupSettingAdapter.submitList(groupSettingList)
 //            groupSettingAdapter.submitList(mutableListOf<GroupSettingModel>().apply {
 //                add(GroupSettingModel("45678", "aa", "dd", "dd", "", "", "", "", ""))
 //            })
+        }
+
+        private fun addGroupSettingMarkerOnMap(groupSettingModel: GroupSettingModel) {
+
+            val initLatLng = LatLng(groupSettingModel.recruiterLat, groupSettingModel.recruiterLng)
+            val markerOptions = MarkerOptions()
+            markerOptions.position(initLatLng)
+            markerOptions.title(groupSettingModel.groupSettingID)
+            map.addMarker(markerOptions)
         }
 
         override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -151,7 +164,7 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
 
             location?.run {
                 val latLng = LatLng(latitude, longitude)   // 위도, 경도
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17f))  // 카메라 이동
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f))  // 카메라 이동
 
                 Log.d("MapsActivity", "위도: $latitude, 경도: $longitude")     // 로그 확인 용
             }
@@ -192,7 +205,7 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
             yesButton {
                 ActivityCompat.requestPermissions(this@JoinGroupActivity,  // 첫 전달인자: Context 또는 Activity
                     // this: DialogInterface 객체
-                    // this@MapsActivity는 액티비티를 명시적으로 가리킨 것임
+                    // this@JoinGroupActivity는 액티비티를 명시적으로 가리킨 것임
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                     REQUEST_ACCESS_FINE_LOCATION)
             }

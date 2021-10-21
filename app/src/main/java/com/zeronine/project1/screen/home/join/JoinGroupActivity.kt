@@ -1,14 +1,14 @@
-package com.zeronine.project1.screen.home
+package com.zeronine.project1.screen.home.join
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -34,9 +35,8 @@ import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.yesButton
-import java.security.acl.Group
 
-class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
+class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var joinBinding: ActivityJoinBinding
     private lateinit var map:GoogleMap
@@ -55,9 +55,9 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
             if(groupSettingModel.recruiting == 1){  // 이 공동구매 세팅이 진행중(1)이라면 groupSettingList 에 추가한다
                 groupSettingList.add(groupSettingModel)
                 addGroupSettingMarkerOnMap(groupSettingModel)
+                Log.d("CHECK THIS!!", "${groupSettingModel}")
             }
-            Log.d("CHECK THIS!!", "${groupSettingList}")
-            groupSettingAdapter.submitList(groupSettingList)
+            //groupSettingAdapter.submitList(groupSettingList)
 //            groupSettingAdapter.submitList(mutableListOf<GroupSettingModel>().apply {
 //                add(GroupSettingModel("45678", "aa", "dd", "dd", "", "", "", "", ""))
 //            })
@@ -68,8 +68,9 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
             val initLatLng = LatLng(groupSettingModel.recruiterLat, groupSettingModel.recruiterLng)
             val markerOptions = MarkerOptions()
             markerOptions.position(initLatLng)
-            markerOptions.title(groupSettingModel.groupSettingID)
-            map.addMarker(markerOptions)
+            markerOptions.title(groupSettingModel.foodCategory)
+            val marker = map.addMarker(markerOptions)
+            marker!!.tag = groupSettingModel.groupSettingId
         }
 
         override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -97,22 +98,39 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
         val view = joinBinding.root
         setContentView(view)
 
-        groupSettingDB = Firebase.database.reference.child(DB_GROUPSETTING)
+       groupSettingDB = Firebase.database.reference.child(DB_GROUPSETTING)
         groupSettingAdapter = GroupSettingAdapter()
 
-        joinBinding.recyclerView.layoutManager = LinearLayoutManager(this)
-        joinBinding.recyclerView.adapter = groupSettingAdapter
+//        joinBinding.recyclerView.layoutManager = LinearLayoutManager(this)
+//        joinBinding.recyclerView.adapter = groupSettingAdapter
 
         setupGoogleMap()
         locationInit()
-//        getRecruitingGroupSetting()
         groupSettingDB.addChildEventListener(listener)
     }
 
-//    private fun getRecruitingGroupSetting() {
-//        groupSettingDB.addChildEventListener(listener)
-//        Log.d("CHECK THIS!!!", "addChildEvent Listener 이 실행중입니다.")
-//    }
+    @Override
+    public override fun onMarkerClick(marker: Marker): Boolean {
+        marker.showInfoWindow()
+
+        Log.d("MarkerClicked", "marker tag : ${marker.tag}")
+        val markerGroupSettingId = marker.tag!!.toString()
+
+        val foodCategoryDB = markerGroupSettingId?.let { groupSettingDB.child(it).child("foodCategory") }
+        val peopleDB = markerGroupSettingId?.let { groupSettingDB.child(it).child("totalPeople") }
+        val timeDB = markerGroupSettingId?.let { groupSettingDB.child(it).child("waitingTime") }
+        foodCategoryDB!!.get().addOnSuccessListener {
+            joinBinding.showMarkerFoodCategory.text = "■ food category : ${it.value}"
+        }
+        peopleDB!!.get().addOnSuccessListener {
+            joinBinding.showMarkerPeopleStatus.text = "■ total people : ${it.value}"
+        }
+        timeDB!!.get().addOnSuccessListener {
+            joinBinding.showMarkerTimeStatus.text = "■ waiting time : ${it.value}"
+        }
+
+        return true
+    }
 
 
     private fun setupGoogleMap() {
@@ -124,6 +142,8 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         this.map = map
         setDefaultLocation()
+        //map.setOnInfoWindowClickListener(this)
+        map.setOnMarkerClickListener(this)
     }
 
 

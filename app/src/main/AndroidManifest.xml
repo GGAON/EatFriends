@@ -26,7 +26,7 @@
         <activity android:name="com.zeronine.project1.screen.intro.SignUpActivity"/>
         <activity android:name="com.zeronine.project1.screen.home.MakeGroupActivity"/>
         <activity android:name="com.zeronine.project1.screen.home.WaitingGroupActivity"/>
-        <activity android:name="com.zeronine.project1.screen.home.JoinGroupActivity"/>
+        <activity android:name="com.zeronine.project1.screen.home.join.JoinGroupActivity"/>
         <activity android:name="com.zeronine.project1.screen.mypage.HowToUseActivity"/>]
         <activity android:name=".screen.order.OrderActivity"/>
         <activity android:name=".screen.order.DeliveryActivity"/>

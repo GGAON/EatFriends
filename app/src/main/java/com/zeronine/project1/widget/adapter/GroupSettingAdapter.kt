@@ -48,7 +48,7 @@ class GroupSettingAdapter :
                 newItem: GroupSettingModel
             ): Boolean {
                 //고유키값이 같은지 확인
-                return oldItem.groupSettingID == newItem.groupSettingID
+                return oldItem.groupSettingId == newItem.groupSettingId
             }
 
             override fun areContentsTheSame(

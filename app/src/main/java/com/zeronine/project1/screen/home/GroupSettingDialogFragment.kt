@@ -14,7 +14,7 @@ import com.zeronine.project1.databinding.DialogGroupsettingBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-public var groupSettingId : String? = null
+public var currentGroupSettingID : String? = null
 
 class GroupSettingDialogFragment : DialogFragment() {
 
@@ -67,12 +67,12 @@ class GroupSettingDialogFragment : DialogFragment() {
 // "Group Setting을 하기로 결정하였으므로 database에 저장한다"
 
         val recruiterId = Firebase.auth.currentUser?.uid.orEmpty()
-        groupSettingId = Firebase.database.reference.child("GroupSetting").push().key.orEmpty()
+        currentGroupSettingID = Firebase.database.reference.child("GroupSetting").push().key.orEmpty()
         val currentGroupSettingDB = Firebase.database.reference.child("GroupSetting").child(
-            groupSettingId!!
+            currentGroupSettingID!!
         )
         val groupSettingInfo = mutableMapOf<String,Any>()
-        groupSettingInfo["groupSettingId"] = groupSettingId!!
+        groupSettingInfo["groupSettingId"] = currentGroupSettingID.toString()
         groupSettingInfo["recruiterId"] = recruiterId
         groupSettingInfo["foodCategory"] = foodCategory.toString()
         groupSettingInfo["totalPeople"] = totalPeople.toString()
@@ -83,8 +83,9 @@ class GroupSettingDialogFragment : DialogFragment() {
         recruiting
         0 : 기본생성자 임의값
         1 : 공동구매 모집중
-        2 : 공동구매 성공
-        3 : 공동구매 실패
+        2 : 공동구매 주문중 (모집성공)
+        3 : 공동구매 성공 (주문완료)
+        4 : 공동구매 실패
          */
         groupSettingInfo["recruiting"] = 1
         groupSettingInfo["startTime"] = getCurrentTime()
@@ -93,7 +94,7 @@ class GroupSettingDialogFragment : DialogFragment() {
     }
 
     public fun getGroupSettingId() : String? {
-        return groupSettingId
+        return currentGroupSettingID
     }
 
 }

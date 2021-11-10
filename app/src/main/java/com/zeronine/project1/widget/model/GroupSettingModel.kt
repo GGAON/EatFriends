@@ -4,8 +4,8 @@ data class GroupSettingModel(
     val groupSettingId: String,
     val recruiterId: String,
     val foodCategory: String,
-    val totalPeople: String,
-    val waitingTime: String,
+    val totalPeople: Int,
+    val waitingTime: Int,
     val recruiterLat: Double,
     val recruiterLng: Double,
     val recruiting: Int,
@@ -19,5 +19,5 @@ data class GroupSettingModel(
          */
 )
 {
-    constructor(): this("", "", "", "", "", 37.55169195608614, 126.92498046225892, 0, "")
+    constructor(): this("", "", "", 0, 0, 37.55169195608614, 126.92498046225892, 0, "")
 }

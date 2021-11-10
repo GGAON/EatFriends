@@ -43,9 +43,9 @@ class OrderActivity: AppCompatActivity() {
         val view = orderBinding.root
         setContentView(view)
 
-
         orderBinding.completeButton.setOnClickListener {
             startActivity(Intent(this, DeliveryActivity::class.java))
+            finish()
         }
 
     }

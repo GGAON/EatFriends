@@ -81,6 +81,7 @@ class MakeGroupActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             else {
                 GroupSettingDialogFragment().show(supportFragmentManager, "GroupSettingDialogFragment")
+                finish()
             }
         }
 

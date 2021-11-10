@@ -8,15 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.zeronine.project1.data.DB.DBKey
 import com.zeronine.project1.databinding.DialogGroupsettingBinding
+import com.zeronine.project1.screen.home.waiting.WaitingGroupActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-public var currentGroupSettingID : String? = null
+var currentGroupSettingID: String? = null
 
 class GroupSettingDialogFragment : DialogFragment() {
+
+    private lateinit var userDB: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +36,8 @@ class GroupSettingDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        userDB = Firebase.database.reference.child(DBKey.DB_USERS)
 
         val binding2 = DialogGroupsettingBinding.bind(view)
 
@@ -54,8 +61,8 @@ class GroupSettingDialogFragment : DialogFragment() {
         }
     }
 
-    private fun getCurrentTime() : String {
-        val now : Long = System.currentTimeMillis()
+    private fun getCurrentTime(): String {
+        val now: Long = System.currentTimeMillis()
         val date = Date(now)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("ko", "KR"))
         val stringTime = dateFormat.format(date)
@@ -67,16 +74,17 @@ class GroupSettingDialogFragment : DialogFragment() {
 // "Group Setting을 하기로 결정하였으므로 database에 저장한다"
 
         val recruiterId = Firebase.auth.currentUser?.uid.orEmpty()
-        currentGroupSettingID = Firebase.database.reference.child("GroupSetting").push().key.orEmpty()
+        currentGroupSettingID =
+            Firebase.database.reference.child("GroupSetting").push().key.orEmpty()
         val currentGroupSettingDB = Firebase.database.reference.child("GroupSetting").child(
             currentGroupSettingID!!
         )
-        val groupSettingInfo = mutableMapOf<String,Any>()
+        val groupSettingInfo = mutableMapOf<String, Any>()
         groupSettingInfo["groupSettingId"] = currentGroupSettingID.toString()
         groupSettingInfo["recruiterId"] = recruiterId
         groupSettingInfo["foodCategory"] = foodCategory.toString()
-        groupSettingInfo["totalPeople"] = totalPeople.toString()
-        groupSettingInfo["waitingTime"] = waitingTime.toString()
+        groupSettingInfo["totalPeople"] = totalPeople!!
+        groupSettingInfo["waitingTime"] = waitingTime!!
         groupSettingInfo["recruiterLat"] = recruiterLat!!
         groupSettingInfo["recruiterLng"] = recruiterLng!!
         /*
@@ -91,9 +99,24 @@ class GroupSettingDialogFragment : DialogFragment() {
         groupSettingInfo["startTime"] = getCurrentTime()
         currentGroupSettingDB.updateChildren(groupSettingInfo)
 
+
+//Save Group Setting Member
+        val userId = Firebase.auth.currentUser?.uid.orEmpty()
+//        var myName = ""
+//        userDB.child(userId).child("name").get().addOnSuccessListener {
+//            myName = it.value.toString()
+//        }
+        val memberInfo = mutableMapOf<String, Any>()
+        val memberInfoDB =
+            Firebase.database.reference.child("GroupSettingMember").child(currentGroupSettingID!!)
+        memberInfo["MemberId"] = userId
+//        userDB.child(userId).child("name").get().addOnSuccessListener {
+//            memberInfo["MemberName"] = it.value.toString()
+//        }
+        memberInfoDB.child(userId).updateChildren(memberInfo)
     }
 
-    public fun getGroupSettingId() : String? {
+    public fun getGroupSettingId(): String? {
         return currentGroupSettingID
     }
 

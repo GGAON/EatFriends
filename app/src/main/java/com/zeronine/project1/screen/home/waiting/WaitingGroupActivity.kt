@@ -57,6 +57,8 @@ class WaitingGroupActivity : AppCompatActivity() {
         val view = waitingBinding.root
         setContentView(view)
 
+        Log.d("public 변수 확인", "currentGroupSettingID = $currentGroupSettingID")
+
         memberInfoDB = Firebase.database.reference.child(DBKey.DB_GROUPSETTINGMEMBER)
         groupSettingDB = Firebase.database.reference.child(DBKey.DB_GROUPSETTING)
         userDB = Firebase.database.reference.child(DBKey.DB_USERS)
@@ -67,21 +69,6 @@ class WaitingGroupActivity : AppCompatActivity() {
         memberInfoDB.child(currentGroupSettingID!!).addValueEventListener(listener)
 
         checkMemberNumANDTotalPeople()
-
-        //checkWaitingStatus()
-
-
-//        waitingBinding.joinOtherGroup.setOnClickListener {
-//            finish()
-//            startActivity(Intent(this, JoinGroupActivity::class.java))
-//        }
-//
-//        waitingBinding.orderNowButton.setOnClickListener {
-//            finish()
-//            startActivity(Intent(this, OrderActivity::class.java))
-//        }
-
-
     }
 
     private fun checkMemberNumANDTotalPeople() {
@@ -94,8 +81,6 @@ class WaitingGroupActivity : AppCompatActivity() {
                     startActivity(Intent(this, OrderActivity::class.java))
                     finish()
                 }, timeOut)
-//                startActivity(Intent(this, OrderActivity::class.java))
-//                finish()
             }
         }
     }

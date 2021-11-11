@@ -99,26 +99,6 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnM
 
     }
 
-//    private val memberListener = object : ChildEventListener{
-//        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-//            memberNum = snapshot.childrenCount
-//            Log.d("Check memberDB num", "${memberNum}")
-//        }
-//
-//        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-//        }
-//
-//        override fun onChildRemoved(snapshot: DataSnapshot) {
-//        }
-//
-//        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-//        }
-//
-//        override fun onCancelled(error: DatabaseError) {
-//        }
-//
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -164,31 +144,6 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnM
 
         val groupSettingId = marker.tag.toString()
         Log.d("Check marker tag", "${groupSettingId}")
-//        val currentUserId = Firebase.auth.currentUser?.uid.orEmpty()
-//        val memberInfoDB =
-//            Firebase.database.reference.child("GroupSettingMember").child(groupSettingId)
-//
-//        val memberListener = object : ChildEventListener {
-//            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-//                memberNum += snapshot.childrenCount
-//                Log.d("Check memberDB num", "${memberNum}")
-//            }
-//
-//            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-//            }
-//
-//            override fun onChildRemoved(snapshot: DataSnapshot) {
-//            }
-//
-//            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//            }
-//
-//        }
-//        memberInfoDB.addChildEventListener(memberListener)
-
 
         return true
     }

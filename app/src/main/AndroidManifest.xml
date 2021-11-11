@@ -28,8 +28,8 @@
         <activity android:name="com.zeronine.project1.screen.home.waiting.WaitingGroupActivity"/>
         <activity android:name="com.zeronine.project1.screen.home.waiting.WaitingMemberActivity"/>
         <activity android:name="com.zeronine.project1.screen.home.join.JoinGroupActivity"/>
-        <activity android:name="com.zeronine.project1.screen.mypage.HowToUseActivity"/>]
-        <activity android:name=".screen.order.OrderActivity"/>
+        <activity android:name="com.zeronine.project1.screen.mypage.HowToUseActivity"/>
+        <activity android:name="com.zeronine.project1.screen.order.OrderActivity"/>
         <activity android:name=".screen.order.DeliveryActivity"/>
 
         <meta-data

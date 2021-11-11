@@ -58,6 +58,8 @@ class WaitingMemberActivity : AppCompatActivity() {
         val view = waitingMemberBinding.root
         setContentView(view)
 
+        Log.d("public 변수 확인", "currentGroupSettingID = $currentGroupSettingID")
+
         memberInfoDB = Firebase.database.reference.child(DB_GROUPSETTINGMEMBER)
         groupSettingDB = Firebase.database.reference.child(DB_GROUPSETTING)
         userDB = Firebase.database.reference.child(DB_USERS)
@@ -68,16 +70,6 @@ class WaitingMemberActivity : AppCompatActivity() {
         memberInfoDB.child(currentGroupSettingID!!).addValueEventListener(listener)
 
         checkMemberNumANDTotalPeople()
-
-//        groupSettingDB.child(currentGroupSettingID!!).child("totalPeople").get().addOnSuccessListener {
-//            Log.d("check member", "memberNum : ${memberNum}, totalPeople : ${totalPeople}")
-//            if(memberNum == totalPeople) {  //공동구매 모집 설정인원과 현재 인원이 같다면  orderActivity로 간다
-//                //groupSettingDB.child(currentGroupSettingID!!).child("recruiting").setValue(2)
-//                Log.d("goto OrderActivity", "OrderActivity")
-//                startActivity(Intent(this, OrderActivity::class.java))
-//                finish()
-//            }
-//        }
     }
 
     private fun checkMemberNumANDTotalPeople() {
@@ -90,8 +82,6 @@ class WaitingMemberActivity : AppCompatActivity() {
                     startActivity(Intent(this, OrderActivity::class.java))
                     finish()
                 }, timeOut)
-//                startActivity(Intent(this, OrderActivity::class.java))
-//                finish()
             }
         }
     }

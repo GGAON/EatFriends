@@ -2,6 +2,7 @@ package com.zeronine.project1.screen.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,8 +12,10 @@ import com.zeronine.project1.R
 import com.zeronine.project1.screen.friends.FriendsFragment
 import com.zeronine.project1.screen.history.HistoryFragment
 import com.zeronine.project1.screen.home.HomeFragment
+import com.zeronine.project1.screen.home.currentGroupSettingID
 import com.zeronine.project1.screen.intro.LoginActivity
 import com.zeronine.project1.screen.mypage.MyPageFragment
+
 
 class PageActivity:AppCompatActivity() {
 
@@ -28,6 +31,12 @@ class PageActivity:AppCompatActivity() {
         val historyFragment = HistoryFragment()
         val myPageFragment = MyPageFragment()
 
+//
+//        //임시로 public 변수 null처리해주기
+//        foodCategory = null
+//        totalPeople = 2
+//        waitingTime = 5
+        Log.d("public 변수 확인", "currentGroupSettingID = $currentGroupSettingID")
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 

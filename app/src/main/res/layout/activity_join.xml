@@ -80,15 +80,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/showMarkerPeopleStatus" />
 
-        <Button
-            android:id="@+id/beFriendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Be Friend!"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/showMarkerTimeStatus" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

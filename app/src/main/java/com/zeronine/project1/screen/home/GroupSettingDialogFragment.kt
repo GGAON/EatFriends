@@ -52,6 +52,12 @@ class GroupSettingDialogFragment : DialogFragment() {
             saveGroupSetting()
 
             activity?.let {
+
+//                //public 변수 null처리해주기
+//                foodCategory = null
+//                totalPeople = 2
+//                waitingTime = 5
+
                 startActivity(Intent(context, WaitingGroupActivity::class.java))
             }
             dismiss()
@@ -66,7 +72,7 @@ class GroupSettingDialogFragment : DialogFragment() {
         val date = Date(now)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("ko", "KR"))
         val stringTime = dateFormat.format(date)
-        Log.d("Check currentTime", "Current Time : ${stringTime}")
+        Log.d("Check currentTime", "Current Time : $stringTime")
         return stringTime.toString()
     }
 
@@ -75,7 +81,8 @@ class GroupSettingDialogFragment : DialogFragment() {
 
         val recruiterId = Firebase.auth.currentUser?.uid.orEmpty()
         currentGroupSettingID =
-            Firebase.database.reference.child("GroupSetting").push().key.orEmpty()
+            Firebase.database.reference.child("GroupSetting").push().key
+        Log.d("임시로 변수값 확인", "currentGroupSettingID = $currentGroupSettingID")
         val currentGroupSettingDB = Firebase.database.reference.child("GroupSetting").child(
             currentGroupSettingID!!
         )
@@ -114,10 +121,6 @@ class GroupSettingDialogFragment : DialogFragment() {
 //            memberInfo["MemberName"] = it.value.toString()
 //        }
         memberInfoDB.child(userId).updateChildren(memberInfo)
-    }
-
-    public fun getGroupSettingId(): String? {
-        return currentGroupSettingID
     }
 
 }

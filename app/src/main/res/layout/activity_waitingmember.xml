@@ -73,10 +73,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/waitToJoinTextView"
             android:text="please wait for friends to join ..."
             android:textAlignment="center"
             android:textSize="15dp"
-            android:visibility="gone"
             tools:visibility="visible"/>
 
         <View
@@ -88,8 +88,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="100dp"
+            android:id="@+id/showMemberRecyclerView"
             />
 
     </LinearLayout>
@@ -111,5 +112,31 @@
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintRight_toRightOf="parent"-->
 <!--        android:layout_margin="20dp"/>-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MATCHED!!"
+        android:textSize="50sp"
+        android:id="@+id/matchedTextView"
+        android:visibility="gone"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/loadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="wait to order..."
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/matchedTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

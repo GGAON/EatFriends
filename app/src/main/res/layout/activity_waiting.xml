@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -48,22 +48,22 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/showFoodSetting"
-                    android:textSize="18sp" />
-
-                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/showTotalPeopleSetting"
                     android:textSize="18sp" />
 
                 <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/showWaitingTimeSetting"
-                android:textSize="18sp" />
+                    android:id="@+id/showTotalPeopleSetting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/showWaitingTimeSetting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp" />
 
 
             </LinearLayout>
@@ -72,51 +72,72 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/waitToJoinTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/waitToJoinTextView"
             android:text="please wait for friends to join ..."
             android:textAlignment="center"
             android:textSize="15dp"
-            android:visibility="gone"
             tools:visibility="visible" />
+
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray"
             android:layout_marginTop="6dp"
-            />
+            android:background="@color/gray" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/showMemberRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            />
+            android:layout_marginTop="100dp" />
 
     </LinearLayout>
 
-<!--    <Button-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:text="Just Order NOW!!!"-->
-<!--        android:id="@+id/orderNowButton"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        android:layout_margin="20dp"/>-->
+    <!--    <Button-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:text="Just Order NOW!!!"-->
+    <!--        android:id="@+id/orderNowButton"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        android:layout_margin="20dp"/>-->
 
-<!--    <Button-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:text="JOIN OTHER GROUP"-->
-<!--        android:id="@+id/joinOtherGroup"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        android:layout_margin="20dp"/>-->
-
-
+    <!--    <Button-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:text="JOIN OTHER GROUP"-->
+    <!--        android:id="@+id/joinOtherGroup"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        android:layout_margin="20dp"/>-->
 
 
+    <TextView
+        android:id="@+id/matchedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MATCHED!!"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/loadingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="wait to order..."
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/matchedTextView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

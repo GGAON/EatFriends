@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -21,6 +22,8 @@ import com.zeronine.project1.databinding.ActivityWaitingBinding
 import com.zeronine.project1.screen.home.currentGroupSettingID
 import com.zeronine.project1.screen.home.totalPeople
 import com.zeronine.project1.screen.order.OrderActivity
+import com.zeronine.project1.widget.adapter.MemberAdapter
+import com.zeronine.project1.widget.model.MemberModel
 
 private lateinit var groupSettingDB: DatabaseReference
 
@@ -31,18 +34,18 @@ class WaitingGroupActivity : AppCompatActivity() {
     private lateinit var groupSettingDB: DatabaseReference
     private lateinit var userDB: DatabaseReference
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var memberAdapter: MemberAdapter
 
     var memberNum = 0
-    private val timeOut:Long = 9000 // 3000 : 1sec
+    private val timeOut:Long = 5000 // 3000 : 1sec
+
+    private val memberList = mutableListOf<MemberModel>()
 
     private val listener = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
-            if(currentGroupSettingID != null) {
                 memberNum = snapshot.childrenCount.toInt()
                 Log.d("Check memberDB num", "${memberNum}")
                 checkMemberNumANDTotalPeople()
-            }
-
         }
 
         override fun onCancelled(error: DatabaseError) {
@@ -50,6 +53,38 @@ class WaitingGroupActivity : AppCompatActivity() {
 
     }
 
+    private val listener2 = object : ChildEventListener {
+        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+            memberNum = snapshot.childrenCount.toInt()
+            val memberModel = snapshot.getValue(MemberModel::class.java)
+            memberModel ?: return
+            memberList.add(memberModel)
+            Log.d("CHECK THIS!!", "$memberModel")
+            memberAdapter.submitList(memberList)
+            waitingBinding.showMemberRecyclerView.adapter = memberAdapter
+        }
+
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+        }
+
+        override fun onChildRemoved(snapshot: DataSnapshot) {
+            val memberModel = snapshot.getValue(MemberModel::class.java)
+            memberModel ?: return
+            memberList.remove(memberModel)
+            memberAdapter.submitList(memberList)
+            waitingBinding.showMemberRecyclerView.adapter = memberAdapter
+        }
+
+        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +99,14 @@ class WaitingGroupActivity : AppCompatActivity() {
         userDB = Firebase.database.reference.child(DBKey.DB_USERS)
         auth = Firebase.auth
 
+        //RecyclerView에 Adapter를 연결해준다.
+        memberAdapter = MemberAdapter()
+        waitingBinding.showMemberRecyclerView.layoutManager = LinearLayoutManager(this)
+        waitingBinding.showMemberRecyclerView.adapter = memberAdapter
+
         showGroupSetting()
+
+        memberInfoDB.child(currentGroupSettingID!!).addChildEventListener(listener2)
 
         memberInfoDB.child(currentGroupSettingID!!).addValueEventListener(listener)
 
@@ -76,6 +118,9 @@ class WaitingGroupActivity : AppCompatActivity() {
             Log.d("check member", "memberNum : ${memberNum}, totalPeople : ${it.value}")
             if(memberNum == it.value.toString().toInt()) {  //공동구매 모집 설정인원과 현재 인원이 같다면  orderActivity로 간다
                 groupSettingDB.child(currentGroupSettingID!!).child("recruiting").setValue(2)
+                waitingBinding.waitToJoinTextView.visibility = View.INVISIBLE
+                waitingBinding.matchedTextView.visibility = View.VISIBLE
+                waitingBinding.loadingTextView.visibility = View.VISIBLE
                 Log.d("goto OrderActivity", "OrderActivity")
                 Handler(Looper.getMainLooper()).postDelayed({
                     startActivity(Intent(this, OrderActivity::class.java))
@@ -87,38 +132,8 @@ class WaitingGroupActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-//        val recruiting =
-//            groupSettingDB.child(currentGroupSettingID!!).child("recruiting").get().toString()
-//                .toInt()
-//        if (recruiting != 1) {
-//            Toast.makeText(this, "This is an unusual approach", Toast.LENGTH_SHORT).show()
-//            finish()
-//        }
-
     }
 
-//    private fun checkWaitingStatus() {
-//        val recruiting =
-//            groupSettingDB.child(currentGroupSettingID!!).child("recruiting").get().toString().toInt()
-//        when (recruiting) {
-//            1 -> Log.d("checkWaitingStatus", "공동구매 모집중")
-//            2 -> {
-//                Log.d("checkWaitingStatus", "공동구매 주문중")
-//                startActivity(Intent(this, OrderActivity::class.java))
-//                finish()
-//            }
-//            3 -> {
-//                Log.d("checkWaitingStatus", "공동구매 성공")
-//                Toast.makeText(this, "This recruiting have finished", Toast.LENGTH_SHORT).show()
-//                //finish()
-//            }
-//            4 -> {
-//                Log.d("checkWaitingStatus", "공동구매 실패")
-//                Toast.makeText(this, "This recruiting have failed", Toast.LENGTH_SHORT).show()
-//                //finish()
-//            }
-//        }
-//    }
 
     override fun onBackPressed() {
         AlertDialog.Builder(this)

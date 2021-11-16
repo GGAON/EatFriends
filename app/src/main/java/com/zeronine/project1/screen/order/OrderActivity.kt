@@ -39,7 +39,7 @@ class OrderActivity : AppCompatActivity() {
             val foodListModel = snapshot.getValue(FoodListModel::class.java)
             foodListModel ?: return
             foodList.add(foodListModel)
-            Log.d("CHECK THIS!!", "${foodListModel}")
+            Log.d("CHECK THIS!!", "$foodListModel")
             foodListAdapter.submitList(foodList)
 
         }
@@ -122,6 +122,7 @@ class OrderActivity : AppCompatActivity() {
                 val orderInfoDB = orderDB.child(currentGroupSettingID!!).child(currentUserId)
                 orderInfoDB.updateChildren(orderInfo)
 
+                groupSettingDB.child(currentGroupSettingID!!).child("recruiting").setValue(3)
                 startActivity(Intent(this, DeliveryActivity::class.java))
                 finish()
             }

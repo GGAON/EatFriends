@@ -23,7 +23,6 @@ class GroupSettingAdapter :
                 binding.totalPeopleTextView.text = "Total People : ${groupSettingModel.totalPeople}"
                 binding.waitingTimeTextView.text = "Waiting Time : ${groupSettingModel.waitingTime} min"
             }
-
         }
     }
 

@@ -30,8 +30,8 @@ import com.zeronine.project1.data.DB.DBKey.Companion.DB_GROUPSETTING
 import com.zeronine.project1.data.DB.DBKey.Companion.DB_GROUPSETTINGMEMBER
 import com.zeronine.project1.data.DB.DBKey.Companion.DB_USERS
 import com.zeronine.project1.databinding.ActivityJoinBinding
-import com.zeronine.project1.screen.home.currentGroupSettingID
-import com.zeronine.project1.screen.home.waiting.WaitingMemberActivity
+import com.zeronine.project1.screen.home.make.WaitingMemberActivity
+import com.zeronine.project1.screen.home.make.currentGroupSettingID
 import com.zeronine.project1.widget.model.GroupSettingModel
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
@@ -198,15 +198,17 @@ class JoinGroupActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnM
         val currentUserId = Firebase.auth.currentUser?.uid.orEmpty()
         val myMemberInfoDB = memberInfoDB.child(groupSettingId)
         val currentGroupSettingDB = groupSettingDB.child(groupSettingId)
-        lateinit var name : String
+        //lateinit var name : String
 
         val myInfo = mutableMapOf<String, Any>()
         myInfo["MemberId"] = currentUserId
-//        userDB.child(currentUserId).child("name").get().addOnSuccessListener {
-//            name = it.value.toString()
-//        }
- //       myInfo["memberName"] = name
-        myMemberInfoDB.child(currentUserId).updateChildren(myInfo)
+        userDB.child(currentUserId).child("name").get().addOnSuccessListener {
+            myInfo["MemberName"] = it.value.toString()
+            Log.d("getName", "${it.value}")
+            myMemberInfoDB.child(currentUserId).updateChildren(myInfo)
+        }
+
+
     }
 
 

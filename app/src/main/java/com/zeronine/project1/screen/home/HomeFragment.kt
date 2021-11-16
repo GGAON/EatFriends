@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.zeronine.project1.R
 import com.zeronine.project1.databinding.FragmentHomeBinding
 import com.zeronine.project1.screen.home.join.JoinGroupActivity
+import com.zeronine.project1.screen.home.make.MakeGroupActivity
 
 class HomeFragment : Fragment(R.layout.fragment_home){
 

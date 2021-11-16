@@ -71,27 +71,28 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/waitToJoinTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="please wait for friends to join ..."
-            android:textAlignment="center"
-            android:textSize="15dp"
-            tools:visibility="visible" />
-
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="6dp"
             android:background="@color/gray" />
 
+        <TextView
+            android:id="@+id/waitToJoinTextView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="please wait for friends to join ..."
+            android:textAlignment="center"
+            android:textSize="20dp"
+            tools:visibility="visible" />
+
+
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/showMemberRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

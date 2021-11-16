@@ -12,7 +12,7 @@ import com.zeronine.project1.R
 import com.zeronine.project1.screen.friends.FriendsFragment
 import com.zeronine.project1.screen.history.HistoryFragment
 import com.zeronine.project1.screen.home.HomeFragment
-import com.zeronine.project1.screen.home.currentGroupSettingID
+import com.zeronine.project1.screen.home.make.currentGroupSettingID
 import com.zeronine.project1.screen.intro.LoginActivity
 import com.zeronine.project1.screen.mypage.MyPageFragment
 

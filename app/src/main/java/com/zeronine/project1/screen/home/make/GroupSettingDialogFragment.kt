@@ -1,4 +1,4 @@
-package com.zeronine.project1.screen.home
+package com.zeronine.project1.screen.home.make
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,8 +12,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.zeronine.project1.data.DB.DBKey
+import com.zeronine.project1.data.DB.DBKey.Companion.DB_GROUPSETTINGMEMBER
 import com.zeronine.project1.databinding.DialogGroupsettingBinding
-import com.zeronine.project1.screen.home.waiting.WaitingGroupActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -109,18 +109,15 @@ class GroupSettingDialogFragment : DialogFragment() {
 
 //Save Group Setting Member
         val userId = Firebase.auth.currentUser?.uid.orEmpty()
-//        var myName = ""
-//        userDB.child(userId).child("name").get().addOnSuccessListener {
-//            myName = it.value.toString()
-//        }
         val memberInfo = mutableMapOf<String, Any>()
         val memberInfoDB =
-            Firebase.database.reference.child("GroupSettingMember").child(currentGroupSettingID!!)
+            Firebase.database.reference.child(DB_GROUPSETTINGMEMBER).child(currentGroupSettingID!!)
         memberInfo["MemberId"] = userId
-//        userDB.child(userId).child("name").get().addOnSuccessListener {
-//            memberInfo["MemberName"] = it.value.toString()
-//        }
-        memberInfoDB.child(userId).updateChildren(memberInfo)
+        userDB.child(userId).child("name").get().addOnSuccessListener {
+            memberInfo["MemberName"] = it.value.toString()
+            memberInfoDB.child(userId).updateChildren(memberInfo)
+        }
+
     }
 
 }

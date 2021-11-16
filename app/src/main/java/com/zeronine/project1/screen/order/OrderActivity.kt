@@ -16,10 +16,11 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.zeronine.project1.data.DB.DBKey
 import com.zeronine.project1.data.DB.DBKey.Companion.DB_FOODLIST
+import com.zeronine.project1.data.DB.DBKey.Companion.DB_GROUPSETTING
 import com.zeronine.project1.data.DB.DBKey.Companion.DB_ORDER
 import com.zeronine.project1.databinding.ActivityOrderBinding
-import com.zeronine.project1.screen.home.currentGroupSettingID
-import com.zeronine.project1.screen.home.totalPeople
+import com.zeronine.project1.screen.home.make.currentGroupSettingID
+import com.zeronine.project1.screen.home.make.totalPeople
 import com.zeronine.project1.widget.adapter.FoodListAdapter
 import com.zeronine.project1.widget.model.FoodListModel
 
@@ -65,7 +66,7 @@ class OrderActivity : AppCompatActivity() {
         val view = orderBinding.root
         setContentView(view)
 
-        groupSettingDB = Firebase.database.reference.child(DBKey.DB_GROUPSETTING)
+        groupSettingDB = Firebase.database.reference.child(DB_GROUPSETTING)
         val currentUserId = Firebase.auth.currentUser?.uid.orEmpty()
 
         Log.d("public 변수 확인", "currentGroupSettingID = $currentGroupSettingID")

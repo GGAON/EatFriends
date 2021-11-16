@@ -1,4 +1,4 @@
-package com.zeronine.project1.screen.home.waiting
+package com.zeronine.project1.screen.home.make
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -19,14 +19,9 @@ import com.zeronine.project1.data.DB.DBKey.Companion.DB_GROUPSETTING
 import com.zeronine.project1.data.DB.DBKey.Companion.DB_GROUPSETTINGMEMBER
 import com.zeronine.project1.data.DB.DBKey.Companion.DB_USERS
 import com.zeronine.project1.databinding.ActivityWaitingmemberBinding
-import com.zeronine.project1.screen.home.currentGroupSettingID
-import com.zeronine.project1.screen.home.foodCategory
-import com.zeronine.project1.screen.home.totalPeople
-import com.zeronine.project1.screen.home.waitingTime
 import com.zeronine.project1.screen.order.OrderActivity
 import com.zeronine.project1.widget.adapter.MemberAdapter
 import com.zeronine.project1.widget.model.MemberModel
-import java.lang.reflect.Member
 
 class WaitingMemberActivity : AppCompatActivity() {
 
@@ -50,7 +45,6 @@ class WaitingMemberActivity : AppCompatActivity() {
         }
 
         override fun onCancelled(error: DatabaseError) {
-
         }
     }
 
@@ -78,11 +72,9 @@ class WaitingMemberActivity : AppCompatActivity() {
         }
 
         override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-
         }
 
         override fun onCancelled(error: DatabaseError) {
-
         }
 
     }

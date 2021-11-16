@@ -31,9 +31,7 @@ import com.google.firebase.ktx.Firebase
 import com.zeronine.project1.R
 import com.zeronine.project1.data.DB.DBKey
 import com.zeronine.project1.databinding.ActivityDeliveryBinding
-import com.zeronine.project1.screen.home.currentGroupSettingID
-import com.zeronine.project1.screen.home.recruiterLat
-import com.zeronine.project1.screen.home.recruiterLng
+import com.zeronine.project1.screen.home.make.currentGroupSettingID
 import com.zeronine.project1.widget.model.GroupSettingModel
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton

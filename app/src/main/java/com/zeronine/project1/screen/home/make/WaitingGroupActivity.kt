@@ -1,4 +1,4 @@
-package com.zeronine.project1.screen.home.waiting
+package com.zeronine.project1.screen.home.make
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -7,10 +7,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -19,8 +17,6 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.zeronine.project1.data.DB.DBKey
 import com.zeronine.project1.databinding.ActivityWaitingBinding
-import com.zeronine.project1.screen.home.currentGroupSettingID
-import com.zeronine.project1.screen.home.totalPeople
 import com.zeronine.project1.screen.order.OrderActivity
 import com.zeronine.project1.widget.adapter.MemberAdapter
 import com.zeronine.project1.widget.model.MemberModel

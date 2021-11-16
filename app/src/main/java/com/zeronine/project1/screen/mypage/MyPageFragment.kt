@@ -13,6 +13,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.zeronine.project1.screen.base.MainActivity
 import com.zeronine.project1.R
+import com.zeronine.project1.data.DB.DBKey.Companion.DB_USERS
 import com.zeronine.project1.databinding.FragmentMypageBinding
 
 class MyPageFragment : Fragment(R.layout.fragment_mypage) {
@@ -29,10 +30,10 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 
         myPageFragment = FragmentMypageBinding.bind(view)
         auth = Firebase.auth
-        userDB = Firebase.database.reference.child("Users")
-        val currentUserDB = userDB.child(getCurrentUserID()).child("name")
+        userDB = Firebase.database.reference.child(DB_USERS)
+        val currentUserName = userDB.child(getCurrentUserID()).child("name")
 
-        currentUserDB.get().addOnSuccessListener {
+        currentUserName.get().addOnSuccessListener {
             Log.i("currentUserDB", "Got name : ${it.value}")
             myPageFragment.showName.text = "Hello, ${it.value}"
         }.addOnFailureListener {

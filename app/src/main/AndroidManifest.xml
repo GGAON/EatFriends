@@ -31,6 +31,7 @@
         <activity android:name="com.zeronine.project1.screen.mypage.HowToUseActivity"/>
         <activity android:name="com.zeronine.project1.screen.order.OrderActivity"/>
         <activity android:name=".screen.order.DeliveryActivity"/>
+        <activity android:name=".screen.friends.ChatActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

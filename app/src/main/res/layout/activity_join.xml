@@ -9,7 +9,7 @@
         android:id="@+id/joinGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/pink"
+        android:background="@color/newPurple"
         android:padding="10dp"
         android:text="JOIN GROUP"
         android:textAlignment="center"

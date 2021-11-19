@@ -19,7 +19,7 @@
             android:id="@+id/waitingFriends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/pink"
+            android:background="@color/newPurple"
             android:padding="10dp"
             android:text="WAITING FRIENDS"
             android:textAlignment="center"
@@ -70,15 +70,6 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/waitToJoinTextView"
-            android:text="please wait for friends to join ..."
-            android:textAlignment="center"
-            android:textSize="15dp"
-            tools:visibility="visible"/>
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -86,10 +77,23 @@
             android:layout_marginTop="6dp"
             />
 
+        <TextView
+            android:id="@+id/waitToJoinTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:text="please wait for friends to join ..."
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"
+            tools:visibility="visible" />
+
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="100dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
             android:id="@+id/showMemberRecyclerView"
             />
 

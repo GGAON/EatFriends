@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/itemFood"
+    android:background="@color/white"
     android:padding="10dp">
 
     <TextView

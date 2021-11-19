@@ -9,5 +9,6 @@ class DBKey {
         const val DB_FOODLIST = "FoodList"
         const val DB_ORDER = "Order"
         const val DB_CHATROOMS = "ChatRooms"
+        const val DB_COMMENTS = "Comments"
     }
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import com.zeronine.project1.data.DB.DBKey.Companion.DB_FRIENDS
 import com.zeronine.project1.data.DB.DBKey.Companion.DB_GROUPSETTING
 import com.zeronine.project1.data.DB.DBKey.Companion.DB_USERS
 import com.zeronine.project1.databinding.ItemMemberBinding
+import com.zeronine.project1.screen.home.make.WaitingGroupActivity
 import com.zeronine.project1.screen.home.make.currentGroupSettingID
 import com.zeronine.project1.widget.model.FriendsModel
 import com.zeronine.project1.widget.model.MemberModel
@@ -26,29 +28,33 @@ class MemberAdapter
 
     private val friendList = mutableListOf<String>()
 
-    private val listener = object : ChildEventListener {
-        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-            val friendsModel = snapshot.getValue(FriendsModel::class.java)
-            friendsModel ?: return
-            friendList.add(friendsModel.FriendId)
-        }
-
-        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-        }
-
-        override fun onChildRemoved(snapshot: DataSnapshot) {
-            val friendsModel = snapshot.getValue(FriendsModel::class.java)
-            friendsModel ?: return
-            friendList.remove(friendsModel.FriendId)
-        }
-
-        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-        }
-
-        override fun onCancelled(error: DatabaseError) {
-        }
-
-    }
+//    private val listener = object : ChildEventListener {
+//        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+//            val friendsModel = snapshot.getValue(FriendsModel::class.java)
+//            friendsModel ?: return
+//            friendList.add(friendsModel.FriendId)
+//        }
+//
+//        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+//        }
+//
+//        override fun onChildRemoved(snapshot: DataSnapshot) {
+//            val friendsModel = snapshot.getValue(FriendsModel::class.java)
+//            friendsModel ?: return
+//            friendList.remove(friendsModel.FriendId)
+//
+//            if ( friendList.contains(memberModel.MemberId)) {
+//                binding.addFriendButton.visibility = View.INVISIBLE
+//            }
+//        }
+//
+//        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+//        }
+//
+//        override fun onCancelled(error: DatabaseError) {
+//        }
+//
+//    }
 
     inner class ViewHolder(private val binding: ItemMemberBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -82,10 +88,43 @@ class MemberAdapter
             }
 
             //현재 member가 내 friendDB list에 있는지 확인 -> 친구라면 친구추가 버튼 INVISIBLE
-            friendsDB.addChildEventListener(listener)
-            if ( friendList.contains(memberModel.MemberId)) {
-                binding.addFriendButton.visibility = View.INVISIBLE
-            }
+            friendsDB.addChildEventListener(object : ChildEventListener {
+                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    val friendsModel = snapshot.getValue(FriendsModel::class.java)
+                    friendsModel ?: return
+                    friendList.add(friendsModel.FriendId)
+
+                    if ( friendList.contains(memberModel.MemberId)) {
+                        binding.addFriendButton.visibility = View.INVISIBLE
+                    }
+                }
+
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                }
+
+                override fun onChildRemoved(snapshot: DataSnapshot) {
+                    val friendsModel = snapshot.getValue(FriendsModel::class.java)
+                    friendsModel ?: return
+                    friendList.remove(friendsModel.FriendId)
+
+                    if ( friendList.contains(memberModel.MemberId)) {
+                        binding.addFriendButton.visibility = View.INVISIBLE
+                    }
+                }
+
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+
+            })
+
+
+
+//            if ( friendList.contains(memberModel.MemberId)) {
+//                binding.addFriendButton.visibility = View.INVISIBLE
+//            }
 
         }
     }
